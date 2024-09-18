@@ -98,10 +98,10 @@ function Complementos() {
 
   // Redirecionamento para o whatsapp
   const gerarPedido = () => {
-    let mensagem = `Olá, este é o meu pedido:\n`;
+    let mensagem = `Olá, este é o meu pedido\n`;
 
     acaiComplementos.forEach((complementos, index) => {
-      mensagem += `Açaí ${index + 1} (${acaiMls[index]} ml) complementos:\n∙ ${complementos.join('\n∙ ')}\n`;
+      mensagem += `Açaí ${index + 1} (${acaiMls[index]} ml)\n complementos:\n∙ ${complementos.join('\n∙ ')}\n`;
     });
 
     mensagem += `Forma de pagamento: ${formaPagamento}`;
@@ -176,8 +176,8 @@ function Complementos() {
       {etapa === 3 && (
         <div>
           <h1>Escolha a forma de pagamento</h1>
-          <button onClick={() => setFormaPagamento('Pix')}>Pix</button>
-          <button onClick={() => setFormaPagamento('Cartão')}>Cartão</button>
+          <button onClick={() => setFormaPagamento('Pix\n')}>Pix</button>
+          <button onClick={() => setFormaPagamento('Cartão\n')}>Cartão</button>
           <button onClick={gerarPedido} disabled={formaPagamento === 'não informado'}>
             Fazer Pedido
           </button>
