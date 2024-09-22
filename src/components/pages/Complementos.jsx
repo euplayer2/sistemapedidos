@@ -142,9 +142,9 @@ function Complementos() {
       {etapa === 2 && (
         <div className={styles.estilo}>
           {Array.from({ length: numeroAcais }).map((_, index) => (
-            <div key={index}>
-              <h2>Quantas ml para o Açaí {index + 1}?</h2>
-              <select value={acaiMls[index]} onChange={(event) => handleMlChange(index, event)}>
+            <div key={index} className={styles.estilo}>
+              <h3>Quantas ml para o Açaí {index + 1}?</h3>
+              <select value={acaiMls[index]} onChange={(event) => handleMlChange(index, event)} >
                 {opcoesMls.map((ml) => (
                   <option key={ml} value={ml}>
                     {ml} ml
@@ -152,7 +152,7 @@ function Complementos() {
                 ))}
               </select>
 
-              <h3>Escolha os adicionais do Açaí {index + 1} (Você tem direito a: {limiteComplementosPorMl[acaiMls[index]]})</h3>
+              <h3>Adicionais do Açaí {index + 1} (máximo: {limiteComplementosPorMl[acaiMls[index]]})</h3>
               <label>
                 <input
                   type="checkbox"

@@ -7,10 +7,18 @@
     margin-left: 5px;
 }
 
+.estilo h3 {
+    margin-top: 10px;
+    font-size: 23px;
+    margin-left: 5px;
+}
+
 .estilo button {
-    margin-top: 15px;
+    margin-top: 20px;
     display: flex;
-    padding: 4px;
+    padding: 8px;
+    padding-left: 11px;
+    padding-right: 11px;
     border-radius: 4px;
     border: none;
     background-color: #FFFF;
@@ -19,6 +27,7 @@
     -moz-appearance: none;
     appearance: none;
 }
+
 
 .fazerpedido {
     margin: 10px;
@@ -32,16 +41,18 @@ display: flex;
 }
 
 .estilo select {
- padding: 5px;
- padding-left: 8px;
- padding-right: 8px;
-    margin-top: 10px;
+ padding: 9px;
+ padding-left: 30px;
+ padding-right: 30px;
+    margin-top: 14px;
     margin-left: 5px;
+    border-radius: 4px;
+    border: none;
 }
 
 
 .img {
-    width: 600px;
+    width: 550px;
     position: absolute;
     bottom: 0;
     margin-left: -25px;
