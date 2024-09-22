@@ -102,15 +102,21 @@ function Complementos() {
     let mensagem = `Olá, este é o meu pedido\n`;
 
     acaiComplementos.forEach((complementos, index) => {
-      mensagem += `Açaí ${index + 1} (${acaiMls[index]} ml)\n∙ ${complementos.join('\n∙ ')}\n`;
+        mensagem += `Açaí ${index + 1} (${acaiMls[index]} ml)\n∙ ${complementos.join('\n∙ ')}\n`;
     });
+
     mensagem += `Forma de pagamento: ${formaPagamento}`;
     const mensagemCodificada = encodeURIComponent(mensagem);
-    window.open('https://bit.ly/47DCIYo', '_blank');
+
+
+    const linkWhatsapp = `https://api.whatsapp.com/send?phone=5586988214346&text=${mensagemCodificada}`;
+    
+
+    window.location.href = 'https://bit.ly/47DCIYo'; 
+    
     setTimeout(() => {
-        const linkWhatsapp = `https://api.whatsapp.com/send?phone=5586988214346&text=${mensagemCodificada}`;
         window.location.href = linkWhatsapp;
-    }, 500);
+    },); 
 };
 
 
