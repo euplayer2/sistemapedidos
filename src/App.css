@@ -10,6 +10,9 @@
         font-style: normal;
         font-variation-settings:
           "GRAD" 0;
+          -webkit-appearance: none; /* Remove o estilo padrão */
+          -moz-appearance: none;
+          appearance: none;
   }
   
   html, body, #root {

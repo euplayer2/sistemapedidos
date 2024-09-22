@@ -116,7 +116,7 @@ function Complementos() {
     
     setTimeout(() => {
         window.location.href = linkWhatsapp;
-    },); 
+    },200); 
 };
 
 
