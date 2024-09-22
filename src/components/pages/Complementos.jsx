@@ -194,8 +194,8 @@ function Complementos() {
           <button onClick={() => setFormaPagamento('Cartão')}>Cartão</button>
           <div className={styles.proximo}>
           <button onClick={() => setEtapa(2)} className={styles.botaoVoltarFinal}>Voltar</button>
-          <button onClick={gerarPedido} disabled={formaPagamento === 'não informado'} className={styles.fazerPedido}>
-            Fazer Pedido
+          <button onClick={gerarPedido} disabled={formaPagamento === 'não informado'}>
+            FAZER PEDIDO
           </button>
           </div>
         </div>
