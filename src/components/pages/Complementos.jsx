@@ -9,14 +9,27 @@ function Complementos() {
   const [acaiMls, setAcaiMls] = useState([300]);
   const [formaPagamento, setFormaPagamento] = useState('não informado');
   const [checkboxStates, setCheckboxStates] = useState([{}]);
-  const [caldaSelected, setCaldaSelected] = useState(Array(numeroAcais).fill(''));
-  const [frutasSelected, setFrutasSelected] = useState(Array(numeroAcais).fill([]));
+  const [caldas, setCaldas] = useState(Array(8).fill(''));
+  const [frutas, setFrutas] = useState(Array(8).fill([]));
 
-  const opcoesMls = [300, 400, 500];
+  const opcoesMls = [
+    { valor: 300, preco: 12 },
+    { valor: 400, preco: 14 },
+    { valor: 500, preco: 17 },
+    { valor: 700, preco: 27 },
+    { valor: 1000, preco: 30 },
+    { valor: "Barca 1L", preco: 35 },
+    { valor: "Barca 2L", preco: 65 } 
+  ];
+
   const limiteComplementosPorMl = {
-    300: 1,
-    400: 2,
-    500: 3,
+    300: 3,
+    400: 4,
+    500: 5,
+    700: 5,
+    1000: 6,
+    "Barca 1L": 6,
+    "Barca 2L": 6,
   };
 
   const handleNumeroAcaisChange = (e) => {
@@ -25,8 +38,8 @@ function Complementos() {
     setAcaiComplementos(Array(quantidade).fill([]));
     setAcaiMls(Array(quantidade).fill(300));
     setCheckboxStates(Array(quantidade).fill({}));
-    setCaldaSelected(Array(quantidade).fill(''));
-    setFrutasSelected(Array(quantidade).fill([]));
+    setCaldas(Array(quantidade).fill(''));
+    setFrutas(Array(quantidade).fill([]));
   };
 
   const handleCheckboxChange = (indexAcai, event) => {
@@ -49,7 +62,9 @@ function Complementos() {
             return newStates;
           });
         } else {
-          alert(`Você pode escolher no máximo ${maxComplementos} complementos para o Açaí ${acaiMls[indexAcai]} ml.`);
+          alert(
+            `Você pode escolher no máximo ${maxComplementos} complementos para o Açaí ${acaiMls[indexAcai]} ml.`
+          );
           setCheckboxStates((prevStates) => {
             const newStates = [...prevStates];
             newStates[indexAcai] = {
@@ -60,7 +75,9 @@ function Complementos() {
           });
         }
       } else {
-        novosComplementos[indexAcai] = complementosDoAcai.filter((item) => item !== name);
+        novosComplementos[indexAcai] = complementosDoAcai.filter(
+          (item) => item !== name
+        );
         setCheckboxStates((prevStates) => {
           const newStates = [...prevStates];
           newStates[indexAcai] = {
@@ -76,7 +93,7 @@ function Complementos() {
   };
 
   const handleMlChange = (indexAcai, event) => {
-    const ml = Number(event.target.value);
+    const ml = event.target.value;
     setAcaiMls((prev) => {
       const novasMls = [...prev];
       novasMls[indexAcai] = ml;
@@ -94,48 +111,62 @@ function Complementos() {
       newStates[indexAcai] = {};
       return newStates;
     });
+
+    setCaldas((prev) => {
+      const novasCaldas = [...prev];
+      novasCaldas[indexAcai] = '';
+      return novasCaldas;
+    });
+
+    setFrutas((prev) => {
+      const novasFrutas = [...prev];
+      novasFrutas[indexAcai] = [];
+      return novasFrutas;
+    });
   };
 
   const handleCaldaChange = (indexAcai, event) => {
-    setCaldaSelected((prev) => {
+    const { value, checked } = event.target;
+    setCaldas((prev) => {
       const novasCaldas = [...prev];
-      novasCaldas[indexAcai] = event.target.value;
+      if (checked) {
+        novasCaldas[indexAcai] = value;
+      } else {
+        novasCaldas[indexAcai] = '';
+      }
       return novasCaldas;
     });
   };
 
-  const handleFrutaChange = (indexAcai, event) => {
-    const fruta = event.target.value;
-    setFrutasSelected((prev) => {
-      const novasFrutas = [...prev];
-      if (novasFrutas[indexAcai].includes(fruta)) {
-        novasFrutas[indexAcai] = novasFrutas[indexAcai].filter(f => f !== fruta);
-      } else {
-        if (novasFrutas[indexAcai].length < 2) {
-          novasFrutas[indexAcai].push(fruta);
-        } else {
-          alert("Você pode escolher no máximo 2 frutas.");
-        }
+  const handleFrutasChange = (indexAcai, event) => {
+    const { value, checked } = event.target;
+
+    setFrutas((prevFrutas) => {
+      const novasFrutas = [...prevFrutas];
+      if (checked && novasFrutas[indexAcai].length < 2) {
+        novasFrutas[indexAcai].push(value);
+      } else if (!checked) {
+        novasFrutas[indexAcai] = novasFrutas[indexAcai].filter((fruta) => fruta !== value);
       }
       return novasFrutas;
     });
   };
 
   const gerarPedido = () => {
-    let mensagem = `Olá, este é o meu pedido\n`;
+    let mensagem = 'Olá, este é o meu pedido\n';
 
     acaiComplementos.forEach((complementos, index) => {
       mensagem += `Açaí ${index + 1} (${acaiMls[index]} ml)\n∙ ${complementos.join('\n∙ ')}\n`;
-      mensagem += `Calda: ${caldaSelected[index]}\n`;
-      mensagem += `Frutas: ${frutasSelected[index].join(', ')}\n`;
+      mensagem += `Calda: ${caldas[index]}\n`;
+      mensagem += `Frutas: ${frutas[index].join(', ')}\n`;
     });
 
     mensagem += `Forma de pagamento: ${formaPagamento}`;
     const mensagemCodificada = encodeURIComponent(mensagem);
 
     const linkWhatsapp = `https://api.whatsapp.com/send?phone=5586988214346&text=${mensagemCodificada}`;
-    window.location.href = 'https://bit.ly/47DCIYo'; 
-    
+    window.location.href = 'https://bit.ly/47DCIYo';
+
     setTimeout(() => {
       window.location.href = linkWhatsapp;
     }, 200);
@@ -164,9 +195,9 @@ function Complementos() {
             <div key={index} className={styles.estilo}>
               <h3>Quantas ml para o Açaí {index + 1}?</h3>
               <select value={acaiMls[index]} onChange={(event) => handleMlChange(index, event)}>
-                {opcoesMls.map((ml) => (
-                  <option key={ml} value={ml}>
-                    {ml} ml
+                {opcoesMls.map(({ valor, preco }) => (
+                  <option key={valor} value={valor}>
+                    {valor} ml - R$ {preco.toFixed(2)}
                   </option>
                 ))}
               </select>
@@ -193,11 +224,20 @@ function Complementos() {
               <label>
                 <input
                   type="checkbox"
-                  name="Leite Condensado"
-                  checked={checkboxStates[index]?.['Leite Condensado'] || false}
+                  name="Farinha Lacta"
+                  checked={checkboxStates[index]?.['Farinha Lacta'] || false}
                   onChange={(event) => handleCheckboxChange(index, event)}
                 />
-                Leite Condensado
+                Farinha Lacta
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Jujuba"
+                  checked={checkboxStates[index]?.Jujuba || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Jujuba
               </label>
             </div>
           ))}
@@ -207,15 +247,15 @@ function Complementos() {
       )}
 
       {etapa === 3 && (
-        <div>
+        <div className={styles.proximo}>
           {Array.from({ length: numeroAcais }).map((_, index) => (
-            <div key={index}>
-              <h3>Calda do Açaí {index + 1}</h3>
+            <div key={index} className={styles.estilo}>
+              <h3>Escolha a calda do Açaí {index + 1}:</h3>
               <label>
                 <input
                   type="checkbox"
                   value="Chocolate"
-                  checked={caldaSelected[index] === 'Chocolate'}
+                  checked={caldas[index] === 'Chocolate'}
                   onChange={(event) => handleCaldaChange(index, event)}
                 />
                 Chocolate
@@ -224,7 +264,7 @@ function Complementos() {
                 <input
                   type="checkbox"
                   value="Morango"
-                  checked={caldaSelected[index] === 'Morango'}
+                  checked={caldas[index] === 'Morango'}
                   onChange={(event) => handleCaldaChange(index, event)}
                 />
                 Morango
@@ -233,19 +273,19 @@ function Complementos() {
                 <input
                   type="checkbox"
                   value="Caramelo"
-                  checked={caldaSelected[index] === 'Caramelo'}
+                  checked={caldas[index] === 'Caramelo'}
                   onChange={(event) => handleCaldaChange(index, event)}
                 />
                 Caramelo
               </label>
 
-              <h3>Frutas do Açaí {index + 1} (máximo: 2)</h3>
+              <h3>Escolha suas frutas do Açaí {index + 1} (máximo 2):</h3>
               <label>
                 <input
                   type="checkbox"
                   value="Banana"
-                  checked={frutasSelected[index].includes('Banana')}
-                  onChange={(event) => handleFrutaChange(index, event)}
+                  checked={frutas[index].includes('Banana')}
+                  onChange={(event) => handleFrutasChange(index, event)}
                 />
                 Banana
               </label>
@@ -253,8 +293,8 @@ function Complementos() {
                 <input
                   type="checkbox"
                   value="Morango"
-                  checked={frutasSelected[index].includes('Morango')}
-                  onChange={(event) => handleFrutaChange(index, event)}
+                  checked={frutas[index].includes('Morango')}
+                  onChange={(event) => handleFrutasChange(index, event)}
                 />
                 Morango
               </label>
@@ -262,14 +302,13 @@ function Complementos() {
                 <input
                   type="checkbox"
                   value="Kiwi"
-                  checked={frutasSelected[index].includes('Kiwi')}
-                  onChange={(event) => handleFrutaChange(index, event)}
+                  checked={frutas[index].includes('Kiwi')}
+                  onChange={(event) => handleFrutasChange(index, event)}
                 />
                 Kiwi
               </label>
             </div>
           ))}
-
           <button onClick={() => setEtapa(2)}>Voltar</button>
           <button onClick={() => setEtapa(4)}>Próximo</button>
         </div>
@@ -277,13 +316,16 @@ function Complementos() {
 
       {etapa === 4 && (
         <div>
-          <h1>Escolha a forma de pagamento</h1>
-          <button onClick={() => setFormaPagamento('Pix')}>Pix</button>
-          <button onClick={() => setFormaPagamento('Cartão')}>Cartão</button>
+          <h3>Forma de pagamento:</h3>
+          <select value={formaPagamento} onChange={(e) => setFormaPagamento(e.target.value)}>
+            <option value="não informado">Selecione aqui</option>
+            <option value="Pix">Pix</option>
+            <option value="Cartão">Cartão</option>
+          </select>
           <div className={styles.proximo}>
             <button onClick={() => setEtapa(3)} className={styles.botaoVoltarFinal}>Voltar</button>
             <button onClick={gerarPedido} disabled={formaPagamento === 'não informado'}>
-              Fazer Pedido
+              FAZER PEDIDO
             </button>
           </div>
         </div>

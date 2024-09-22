@@ -89,6 +89,6 @@ display: flex;
     width: 500px;
     position: absolute;
     bottom: 0;
-    margin-left: -15px;
+    margin-left: 15px;
 }
 

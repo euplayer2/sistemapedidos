@@ -13,7 +13,8 @@ return (
                   
          <ul className={styles.list}>
             
-         <li className={styles.item}><Link to="bit.ly/47DCIYo">Contato</Link>
+         <li className={styles.item}><a href="https://bit.ly/3Zznhhz" target="_blank" rel="noopener noreferrer">Contato</a>
+
         </li>
        
          </ul>
