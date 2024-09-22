@@ -100,27 +100,26 @@ function Complementos() {
     });
   };
 
-  // Lógica para calda (máximo 1 calda)
   const handleCaldaChange = (event) => {
     const { value, checked } = event.target;
     if (checked) {
-      setCalda(value);  // Seleciona a calda
+      setCalda(value); 
     } else {
-      setCalda('');     // Deseleciona a calda
+      setCalda(''); 
     }
   };
 
-  // Lógica para frutas (máximo 2 frutas)
+
   const handleFrutasChange = (event) => {
     const { value, checked } = event.target;
 
     setFrutas((prevFrutas) => {
       if (checked && prevFrutas.length < 2) {
-        return [...prevFrutas, value];  // Adiciona a fruta se o limite não foi atingido
+        return [...prevFrutas, value];
       } else if (!checked) {
-        return prevFrutas.filter((fruta) => fruta !== value);  // Remove a fruta
+        return prevFrutas.filter((fruta) => fruta !== value);
       } else {
-        return prevFrutas;  // Impede adicionar mais que duas frutas
+        return prevFrutas;
       }
     });
   };
@@ -132,8 +131,6 @@ function Complementos() {
     acaiComplementos.forEach((complementos, index) => {
         mensagem += `Açaí ${index + 1} (${acaiMls[index]} ml)\n∙ ${complementos.join('\n∙ ')}\n`;
     });
-
-    // Inclui calda e frutas como se fossem adicionais
     mensagem += `Calda: ${calda}\nFrutas: ${frutas.join(', ')}\n`;
     mensagem += `Forma de pagamento: ${formaPagamento}`;
     const mensagemCodificada = encodeURIComponent(mensagem);
@@ -212,8 +209,6 @@ function Complementos() {
           <button onClick={() => setEtapa(3)}>Próximo</button>
         </div>
       )}
-
-      {/* Nova etapa para calda e frutas */}
       {etapa === 3 && (
         <div className={styles.proximo}>
           <h3>Escolha sua calda (máximo 1):</h3>
