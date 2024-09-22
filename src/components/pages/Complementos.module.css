@@ -9,8 +9,10 @@
 .estilo button {
     margin-top: 15px;
     display: flex;
-    width: 80px;
-    font-size: 20px;
+    padding: 4px;
+    border-radius: 4px;
+    border: none;
+    background-color: #FFFF;
 }
 
 .fazerpedido {
@@ -25,8 +27,9 @@ display: flex;
 }
 
 .estilo select {
-    width: 50px;
-    font-size: 20px;
+ padding: 5px;
+ padding-left: 8px;
+ padding-right: 8px;
     margin-top: 10px;
 }
 
