@@ -140,7 +140,7 @@ function Complementos() {
       )}
 
       {etapa === 2 && (
-        <div className={styles.estilo}>
+        <div className={styles.proximo}>
           {Array.from({ length: numeroAcais }).map((_, index) => (
             <div key={index} className={styles.estilo}>
               <h3>Quantas ml para o Açaí {index + 1}?</h3>
@@ -192,10 +192,12 @@ function Complementos() {
           <h1>Escolha a forma de pagamento</h1>
           <button onClick={() => setFormaPagamento('Pix')}>Pix</button>
           <button onClick={() => setFormaPagamento('Cartão')}>Cartão</button>
-          <button onClick={gerarPedido} disabled={formaPagamento === 'não informado'}>
+          <div className={styles.proximo}>
+          <button onClick={() => setEtapa(2)} className={styles.botaoVoltarFinal}>Voltar</button>
+          <button onClick={gerarPedido} disabled={formaPagamento === 'não informado'} className={styles.fazerPedido}>
             Fazer Pedido
           </button>
-          <button onClick={() => setEtapa(2)} className={styles.botaoVoltarFinal}>Voltar</button>
+          </div>
         </div>
       )}
     </div>

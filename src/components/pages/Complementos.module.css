@@ -8,35 +8,50 @@
 }
 
 .estilo h3 {
-    margin-top: 10px;
+    margin-top: 13px;
     font-size: 23px;
     margin-left: 5px;
 }
 
 .estilo button {
-    margin-top: 20px;
     display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    margin-right: 10px;
     padding: 8px;
     padding-left: 11px;
     padding-right: 11px;
     border-radius: 4px;
     border: none;
-    background-color: #FFFF;
+    background-color: #ffffff;
     margin-left: 5px;
     -webkit-appearance: none; 
     -moz-appearance: none;
     appearance: none;
 }
 
+.proximo button {
+    margin-top: 25px;
+    justify-content: space-between;
+    margin-right: 10px;
+    padding: 8px;
+    padding-left: 18px;
+    padding-right: 18px;
+    border-radius: 4px;
+    border: none;
+    background-color: #ffffff;
+    margin-left: 5px;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+}
 
-.fazerpedido {
-    margin: 10px;
-    margin-top: 30px;
-    display: flex;
+.fazerPedido {
+    background-color: #93D500 !important;
 }
 
 .estilo label {
-margin-top: 30px;
+margin-top: 15px;
 display: flex;
 }
 
@@ -50,6 +65,14 @@ display: flex;
     border: none;
 }
 
+.estilo input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    appearance: checkbox;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 15px;
+}
 
 .img {
     width: 550px;
