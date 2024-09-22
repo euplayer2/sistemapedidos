@@ -208,7 +208,6 @@ function Complementos() {
 
       {etapa === 3 && (
         <div>
-          <h1>Escolha a calda e as frutas</h1>
           {Array.from({ length: numeroAcais }).map((_, index) => (
             <div key={index}>
               <h3>Calda do Açaí {index + 1}</h3>
