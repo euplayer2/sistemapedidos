@@ -1,16 +1,15 @@
 import './App.css'
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Home from './components/pages/Home'
 import Complementos from './components/pages/Complementos'
+import Navbar from './components/pages/Navbar'
 
 function App() {
 
   return (
     <Router>
-    <div>
-      <Link to="/">Home</Link>
-      <Link to="/complementos">Complementos</Link>
-    </div>
+    
+    <Navbar/>
     
     
     <Routes>

@@ -1,11 +1,18 @@
 import Complementos from "./Complementos";
+import styles from "./Home.module.css"
 
 function Home () {
 
 return (
-    <div>
-        <h1>Home</h1>
-<Complementos/>
+        <div>
+  <div className={styles.home}>
+        <hr color="#FFFFFF"/>
+        <h1>E vamos de açaí!</h1>
+        </div>
+        <div>
+        <Complementos/>
+        </div>
+
         </div>
 )
 

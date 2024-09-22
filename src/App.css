@@ -1,0 +1,23 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+        font-family: "Signika", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+        font-variation-settings:
+          "GRAD" 0;
+  }
+  
+  html, body, #root {
+    background-color:#3D1152;
+    height: 100%;
+  }
+  
+  hr {
+    color: aqua;
+    background-color: #93D500;
+  }

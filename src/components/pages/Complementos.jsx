@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './Complementos.module.css';
+import boneca from "../img/boneca.png"
 
 function Complementos() {
   const [etapa, setEtapa] = useState(1);
@@ -103,18 +104,23 @@ function Complementos() {
     acaiComplementos.forEach((complementos, index) => {
       mensagem += `Açaí ${index + 1} (${acaiMls[index]} ml)\n∙ ${complementos.join('\n∙ ')}\n`;
     });
-
     mensagem += `Forma de pagamento: ${formaPagamento}`;
     const mensagemCodificada = encodeURIComponent(mensagem);
-    const linkWhatsapp = `https://api.whatsapp.com/send?phone=5586995459156&text=${mensagemCodificada}`;
-    window.location.href = linkWhatsapp;
-  };
+    window.open('https://bit.ly/47DCIYo', '_blank');
+    setTimeout(() => {
+        const linkWhatsapp = `https://api.whatsapp.com/send?phone=5586988214346&text=${mensagemCodificada}`;
+        window.location.href = linkWhatsapp;
+    }, 500);
+};
+
+
 
   return (
-    <div className={styles.teste}>
+    <div className={styles.estilo}>
       {etapa === 1 && (
-        <div>
-          <h1>Quantos açaís você deseja hoje?</h1>
+        <div className={styles.estilo}>
+
+          <h2>Quantos você deseja hoje?</h2>
           <select value={numeroAcais} onChange={handleNumeroAcaisChange}>
             {Array.from({ length: 8 }, (_, i) => i + 1).map((num) => (
               <option key={num} value={num}>
@@ -123,11 +129,12 @@ function Complementos() {
             ))}
           </select>
           <button onClick={() => setEtapa(2)}>Próximo</button>
+          <img src={boneca} alt="" className={styles.img}/>
         </div>
       )}
 
       {etapa === 2 && (
-        <div>
+        <div className={styles.estilo}>
           {Array.from({ length: numeroAcais }).map((_, index) => (
             <div key={index}>
               <h2>Quantas ml para o Açaí {index + 1}?</h2>
@@ -139,7 +146,7 @@ function Complementos() {
                 ))}
               </select>
 
-              <h3>Escolha os adicionais para o Açaí {index + 1} (Máximo: {limiteComplementosPorMl[acaiMls[index]]})</h3>
+              <h3>Escolha os adicionais do Açaí {index + 1} (Você tem direito a: {limiteComplementosPorMl[acaiMls[index]]})</h3>
               <label>
                 <input
                   type="checkbox"
@@ -169,6 +176,7 @@ function Complementos() {
               </label>
             </div>
           ))}
+          <button onClick={() => setEtapa(1)}>Voltar</button>
           <button onClick={() => setEtapa(3)}>Próximo</button>
         </div>
       )}
@@ -181,7 +189,7 @@ function Complementos() {
           <button onClick={gerarPedido} disabled={formaPagamento === 'não informado'}>
             Fazer Pedido
           </button>
-          <button onClick={() => setEtapa(2)}>Voltar</button>
+          <button onClick={() => setEtapa(2)} className={styles.botaoVoltarFinal}>Voltar</button>
         </div>
       )}
     </div>
