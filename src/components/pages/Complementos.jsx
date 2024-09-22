@@ -10,10 +10,9 @@ function Complementos() {
   const [formaPagamento, setFormaPagamento] = useState('não informado');
   const [checkboxStates, setCheckboxStates] = useState([{}]);
   
-  const [calda, setCalda] = useState('');
-  const [frutas, setFrutas] = useState([]);
+  const [caldas, setCaldas] = useState(Array(8).fill(''));  
+  const [frutas, setFrutas] = useState(Array(8).fill([]));   
 
-  // escolha de mls e n* de complementos
   const opcoesMls = [300, 400, 500];
   const limiteComplementosPorMl = {
     300: 1,
@@ -27,6 +26,8 @@ function Complementos() {
     setAcaiComplementos(Array(quantidade).fill([]));
     setAcaiMls(Array(quantidade).fill(300));
     setCheckboxStates(Array(quantidade).fill({}));
+    setCaldas(Array(quantidade).fill(''));  
+    setFrutas(Array(quantidade).fill([]));  
   };
 
   const handleCheckboxChange = (indexAcai, event) => {
@@ -98,29 +99,49 @@ function Complementos() {
       newStates[indexAcai] = {};
       return newStates;
     });
+    
+
+    setCaldas((prev) => {
+      const novasCaldas = [...prev];
+      novasCaldas[indexAcai] = '';
+      return novasCaldas;
+    });
+    
+    setFrutas((prev) => {
+      const novasFrutas = [...prev];
+      novasFrutas[indexAcai] = [];
+      return novasFrutas;
+    });
   };
 
-  const handleCaldaChange = (event) => {
+  const handleCaldaChange = (indexAcai, event) => {
     const { value, checked } = event.target;
     if (checked) {
-      setCalda(value); 
+      setCaldas((prev) => {
+        const novasCaldas = [...prev];
+        novasCaldas[indexAcai] = value; 
+        return novasCaldas;
+      });
     } else {
-      setCalda(''); 
+      setCaldas((prev) => {
+        const novasCaldas = [...prev];
+        novasCaldas[indexAcai] = '';  
+        return novasCaldas;
+      });
     }
   };
 
-
-  const handleFrutasChange = (event) => {
+  const handleFrutasChange = (indexAcai, event) => {
     const { value, checked } = event.target;
 
     setFrutas((prevFrutas) => {
-      if (checked && prevFrutas.length < 2) {
-        return [...prevFrutas, value];
+      const novasFrutas = [...prevFrutas];
+      if (checked && novasFrutas[indexAcai].length < 2) {
+        novasFrutas[indexAcai].push(value);
       } else if (!checked) {
-        return prevFrutas.filter((fruta) => fruta !== value);
-      } else {
-        return prevFrutas;
+        novasFrutas[indexAcai] = novasFrutas[indexAcai].filter((fruta) => fruta !== value); 
       }
+      return novasFrutas;
     });
   };
 
@@ -130,8 +151,10 @@ function Complementos() {
 
     acaiComplementos.forEach((complementos, index) => {
         mensagem += `Açaí ${index + 1} (${acaiMls[index]} ml)\n∙ ${complementos.join('\n∙ ')}\n`;
+        mensagem += `Calda: ${caldas[index]}\n`;
+        mensagem += `Frutas: ${frutas[index].join(', ')}\n`;
     });
-    mensagem += `Calda: ${calda}\nFrutas: ${frutas.join(', ')}\n`;
+
     mensagem += `Forma de pagamento: ${formaPagamento}`;
     const mensagemCodificada = encodeURIComponent(mensagem);
 
@@ -209,65 +232,70 @@ function Complementos() {
           <button onClick={() => setEtapa(3)}>Próximo</button>
         </div>
       )}
+
       {etapa === 3 && (
         <div className={styles.proximo}>
-          <h3>Escolha sua calda (máximo 1):</h3>
-          <label>
-            <input
-              type="checkbox"
-              value="Chocolate"
-              checked={calda === 'Chocolate'}
-              onChange={handleCaldaChange}
-            />
-            Chocolate
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              value="Morango"
-              checked={calda === 'Morango'}
-              onChange={handleCaldaChange}
-            />
-            Morango
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              value="Caramelo"
-              checked={calda === 'Caramelo'}
-              onChange={handleCaldaChange}
-            />
-            Caramelo
-          </label>
+          {Array.from({ length: numeroAcais }).map((_, index) => (
+            <div key={index} className={styles.estilo}>
+              <h3>Escolha a calda do Açaí {index + 1}:</h3>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Chocolate"
+                  checked={caldas[index] === 'Chocolate'}
+                  onChange={(event) => handleCaldaChange(index, event)}
+                />
+                Chocolate
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Morango"
+                  checked={caldas[index] === 'Morango'}
+                  onChange={(event) => handleCaldaChange(index, event)}
+                />
+                Morango
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Caramelo"
+                  checked={caldas[index] === 'Caramelo'}
+                  onChange={(event) => handleCaldaChange(index, event)}
+                />
+                Caramelo
+              </label>
 
-          <h3>Escolha suas frutas (máximo 2):</h3>
-          <label>
-            <input
-              type="checkbox"
-              value="Banana"
-              checked={frutas.includes('Banana')}
-              onChange={handleFrutasChange}
-            />
-            Banana
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              value="Morango"
-              checked={frutas.includes('Morango')}
-              onChange={handleFrutasChange}
-            />
-            Morango
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              value="Kiwi"
-              checked={frutas.includes('Kiwi')}
-              onChange={handleFrutasChange}
-            />
-            Kiwi
-          </label>
+              <h3>Escolha suas frutas do Açaí {index + 1} (máximo 2):</h3>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Banana"
+                  checked={frutas[index].includes('Banana')}
+                  onChange={(event) => handleFrutasChange(index, event)}
+                />
+                Banana
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Morango"
+                  checked={frutas[index].includes('Morango')}
+                  onChange={(event) => handleFrutasChange(index, event)}
+                />
+                Morango
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Kiwi"
+                  checked={frutas[index].includes('Kiwi')}
+                  onChange={(event) => handleFrutasChange(index, event)}
+                />
+                Kiwi
+              </label>
+            </div>
+          ))}
           <button onClick={() => setEtapa(2)}>Voltar</button>
           <button onClick={() => setEtapa(4)}>Próximo</button>
         </div>
