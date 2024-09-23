@@ -239,6 +239,159 @@ function Complementos() {
                 />
                 Jujuba
               </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Cereja"
+                  checked={checkboxStates[index]?.Cereja || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Cereja
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Amendoim Triturado"
+                  checked={checkboxStates[index]?.AmendoimTriturado || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Amendoim Triturado
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Flocos de Arroz"
+                  checked={checkboxStates[index]?.FlocosdeArroz || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Flocos de Arroz
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Jujuba"
+                  checked={checkboxStates[index]?.Jujuba || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Jujuba
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Amendoim Inteiro"
+                  checked={checkboxStates[index]?.AmendoimInteiro || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Amendoim Inteiro
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Chocoball"
+                  checked={checkboxStates[index]?.Chocoball || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Chocoball
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Tapioca"
+                  checked={checkboxStates[index]?.Tapioca || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Tapioca
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Paçoca"
+                  checked={checkboxStates[index]?.Paçoca || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Paçoca
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Colorete"
+                  checked={checkboxStates[index]?.Colorete || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Colorete
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Granola"
+                  checked={checkboxStates[index]?.Granola || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Granola
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Castanha"
+                  checked={checkboxStates[index]?.Castanha || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Castanha
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Gotas de Chocolate"
+                  checked={checkboxStates[index]?.GotasdeChocolate || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Gotas de Chocolate
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Biscoito"
+                  checked={checkboxStates[index]?.Biscoito || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Biscoito
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Sucrilhos"
+                  checked={checkboxStates[index]?.Sucrilhos || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Sucrilhos
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Granulado"
+                  checked={checkboxStates[index]?.Granulado || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Granulado
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Marshmallow"
+                  checked={checkboxStates[index]?.Marshmallow || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Marshmallow
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="Coco Ralado"
+                  checked={checkboxStates[index]?.CocoRalado || false}
+                  onChange={(event) => handleCheckboxChange(index, event)}
+                />
+                Coco Ralado
+              </label>
             </div>
           ))}
           <button onClick={() => setEtapa(1)}>Voltar</button>
@@ -250,7 +403,7 @@ function Complementos() {
         <div className={styles.proximo}>
           {Array.from({ length: numeroAcais }).map((_, index) => (
             <div key={index} className={styles.estilo}>
-              <h3>Escolha a calda do Açaí {index + 1}:</h3>
+              <h3>Escolha a cobertura do Açaí {index + 1}:</h3>
               <label>
                 <input
                   type="checkbox"
@@ -272,14 +425,14 @@ function Complementos() {
               <label>
                 <input
                   type="checkbox"
-                  value="Caramelo"
-                  checked={caldas[index] === 'Caramelo'}
+                  value="Leite Condensado"
+                  checked={caldas[index] === 'Leite Condensado'}
                   onChange={(event) => handleCaldaChange(index, event)}
                 />
-                Caramelo
+                Leite Condensado
               </label>
 
-              <h3>Escolha suas frutas do Açaí {index + 1} (máximo 2):</h3>
+              <h3>Agora as frutas do Açaí {index + 1} (até 2):</h3>
               <label>
                 <input
                   type="checkbox"
@@ -307,6 +460,8 @@ function Complementos() {
                 />
                 Kiwi
               </label>
+      
+              
             </div>
           ))}
           <button onClick={() => setEtapa(2)}>Voltar</button>
@@ -319,8 +474,9 @@ function Complementos() {
           <h3>Forma de pagamento:</h3>
           <select value={formaPagamento} onChange={(e) => setFormaPagamento(e.target.value)}>
             <option value="não informado">Selecione aqui</option>
-            <option value="Pix">Pix</option>
-            <option value="Cartão">Cartão</option>
+            <option value="Pix">PIX</option>
+            <option value="Cartão">CARTÃO</option>
+            <option value="Dinheiro">DINHEIRO</option>
           </select>
           <div className={styles.proximo}>
             <button onClick={() => setEtapa(3)} className={styles.botaoVoltarFinal}>Voltar</button>
