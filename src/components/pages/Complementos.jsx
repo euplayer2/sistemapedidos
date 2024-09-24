@@ -269,15 +269,6 @@ function Complementos() {
               <label>
                 <input
                   type="checkbox"
-                  name="Jujuba"
-                  checked={checkboxStates[index]?.Jujuba || false}
-                  onChange={(event) => handleCheckboxChange(index, event)}
-                />
-                Jujuba
-              </label>
-              <label>
-                <input
-                  type="checkbox"
                   name="Amendoim Inteiro"
                   checked={checkboxStates[index]?.AmendoimInteiro || false}
                   onChange={(event) => handleCheckboxChange(index, event)}
